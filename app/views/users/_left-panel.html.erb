@@ -1,0 +1,64 @@
+<div class="span12">
+    <%= form_for @user do |user| %>
+        <div class="form-horizontal">
+            <%= render "shared/error_messages", :target => @user %>
+            <div class="tabbable tabs-left">
+                <ul class="nav nav-tabs">
+                <li class="active"><a href="#tab1" data-toggle="tab">Profile</a></li>
+                <li><a href="#tab2" data-toggle="tab">Account Settings</a></li>
+                <li><a href="#tab3" data-toggle="tab">Notifications</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab1">
+                        <h2>Profile Settings </h2>
+                        <div class="control-group">
+                            <%= user.label :firstname, :class=>"control-label"  %>
+                            <%= user.text_field :first_name, :class=>"controls" %>
+                        </div>
+                        <div class="control-group">
+                            <%= user.label :surname, :class=>"control-label" %>
+                            <%= user.text_field :surname, :class=>"controls" %>
+                        </div>
+                      <div class="control-group">
+                        <%= user.label :avatar_url, "Gravatar", :class=>"control-label" %>
+                        <%= user.text_field :avatar_url, :class=>"controls" %>
+
+                        <%= image_tag avatar_url(@user), :size=>'48x48' %>
+                      </div>
+                        <div class="control-group">
+                            <%= user.label :description, :class=>"control-label" %>
+                            <%= user.text_area :description, :rows => 5, :cols => 25, :class=>"controls" %>
+                        </div>
+                        <div class="control-group">
+                            <%= user.label :facebook, :class=>"control-label" %>
+                            <%= user.text_field :facebook_id, :class=>"controls" %>
+                        </div>
+                        <div class="control-group ">
+                            <%= user.label :twitter, :class=>"control-label" %>
+
+                            <%= user.text_field :twitter_id, :class=>"controls"%>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tab2">
+                        <h2>Account Settings</h2>
+                        <p>Primary Email account</p>
+                        <p>Current Password</p>
+                        <p>New Password</p>
+                        <p>Confirm Password</p>
+                    </div>
+                    <div class="tab-pane" id="tab3">
+                        <h2>Notification Settings</h2>
+                        <p>Send Emails (global setting)</p>
+                        <p>When someone follows my lists</p>
+                        <p>When someone follows me</p>
+                        <p>Someone comments on my ideas</p>
+                        <p>Inspiration newsletter</p>
+                    </div>
+                    <div class="actions">
+                        <%= user.submit "Update", :class=>"btn btn-primary" %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% end %>
+</div>

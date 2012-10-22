@@ -1,0 +1,19 @@
+<div class="btn-group pull-right">
+  <a class="btn dropdown-toggle btn-small btn-inverse" data-toggle="dropdown">
+    <% @assets = Asset.gather_current_user_profile(current_user.id) %>
+    <%= image_tag(@assets.first.asset.url, :size=> "36x36") %>
+  <% if current_user.displayname %>
+        <%= current_user.displayname %>
+    <% else %>
+        <%= current_user.email %>
+    <% end %>
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
+    <li><%= link_to '<i class="icon-home"></i> Home Page'.html_safe,home_path(:id => current_user.displayname) %></li>
+    <li><%= link_to '<i class="icon-pencil"></i> Settings'.html_safe, edit_user_path(:id => current_user.displayname) %></li>
+    <li><%= link_to '<i class="icon-user"></i> Public Profile'.html_safe, user_path(:id => current_user.displayname) %></li>
+    <li class="divider"></li>
+    <li><%= link_to '<i class="icon-off"></i> Log Off'.html_safe, logout_path %></li>
+  </ul>
+</div>

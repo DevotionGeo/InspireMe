@@ -1,0 +1,11 @@
+<% if target.errors.any? %>
+    <div class = "error_messages alert">
+      <strong>Please correct the following</strong>
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      <ul>
+        <% for message in target.errors.full_messages %>
+            <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>

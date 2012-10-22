@@ -1,0 +1,41 @@
+Friends and their recent activity....
+<h2>Already Friends </h2>
+<ul class="thumbnails">
+  <% for friendship in current_user.friendships %>
+      <li class ="span3">
+        <div class="thumbnail">
+
+          <h1><%=h friendship.friend.displayname.titlecase %></h1>
+            (<%= link_to "remove", friendship, :method => :delete %>)
+          <%= friendship.friend.id %>
+          <% @Passt = Asset.find_by_user_id(friendship.friend.id) %>
+          <% if @Passt.present? %>
+
+                  <%=image_tag(@Passt.asset_file_name, :class=> 'pull-left img-polaroid') %>
+
+              <%= @Passt.asset_file_name %>
+          <% end %>
+          <ul>
+          <li>
+            Activity x
+          </li>
+          <li>
+            Activity x
+          </li>
+          <li>
+            Activity x
+          </li>
+          <li>
+            Activity x
+          </li>
+          <li>
+            Activity x
+          </li>
+          <li>
+            Activity x
+          </li>
+          </ul>
+        </div>
+      </li>
+  <% end %>
+</ul>

@@ -1,0 +1,42 @@
+<%= form_for @idea, :html => { :multipart => true }  do |f| %>
+
+    <%= render "shared/error_messages", :target => @idea %>
+
+  <div class="control-group">
+    <%= f.label :title, :class=>"control-label" %>
+    <%= f.text_field :title, :class=>"controls" %>
+  </div>
+    <div class="control-group">
+     Logo added here
+      <%=  f.hidden_field :list_id, :value => @list_id %>
+    </div>
+  <div class="control-group">
+    <%= f.label :content, :class=>"control-label" %>
+    <%= f.text_area :content, :rows=>"5", :columns=>"40", :class=>"controls" %>
+  </div>
+    <div class="control-group">
+
+        <%= f.fields_for :assets do |asset_fields| %>
+          <% if  asset_fields.object.new_record? %>
+            <p><%= asset_fields.file_field :asset %></p>
+        <% end %>
+          <% end %>
+    </div>
+
+    <div class="control-group">
+
+      <%= f.fields_for :assets do |asset_fields| %>
+        <% unless asset_fields.object.new_record? %>
+              <p>
+          <%= image_tag(asset_fields.object.asset.url(:thumb), :class=> 'img-polaroid') %>
+                <span>Remove </span><%= asset_fields.check_box :_destroy %>
+              </p>
+        <% end %>
+      <% end %>
+    </div>
+
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

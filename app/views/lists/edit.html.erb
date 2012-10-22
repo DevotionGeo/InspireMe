@@ -1,0 +1,49 @@
+<h1>Editing list <%= @list.name %></h1>
+
+<%= form_for @list, :class=>"form-horizontal",  :html => { :multipart => true } do |f| %>
+    <%= render "shared/error_messages", :target => @list %>
+
+    <div class="control-group">
+
+    </div>
+    <span class ="clearfix"></span>
+
+
+    <div class="control-group">
+
+      <%= f.fields_for :assets do |asset_fields| %>
+
+          <% unless asset_fields.object.new_record? %>
+              <p>
+                <%= image_tag(asset_fields.object.asset.url(:thumb), :class=> 'img-polaroid') %>
+                <span>Tick to remove </span><%= asset_fields.check_box :_destroy %>
+              </p>
+          <% end %>
+      <% end %>
+    </div>
+
+    <div class="control-group">
+      Choose new logo
+      <%= f.fields_for :assets do |asset_fields| %>
+          <% if  asset_fields.object.new_record? %>
+              <p><%= asset_fields.file_field :asset %></p>
+          <% end %>
+      <% end %>
+    </div>
+    <div class="control-group">
+      <%= f.label :name, "List name", :class=>"control-label" %>
+      <%= f.text_field :name, :class=>"controls" %>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :description, :class=>"control-label" %>
+      <%= f.text_area :description, :rows=>"5", :columns=>"30", :class=>"controls" %>
+    </div>
+
+    <div class="control-group">
+      <%= f.check_box :private, :class=>"controls" %><%= f.label :private, :class=>"checkbox inline control-label" %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>

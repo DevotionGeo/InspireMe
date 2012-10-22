@@ -1,0 +1,24 @@
+<div class="span12">
+  <%= form_for @user, :multipart => :true do |user| %>
+      <div class="form-horizontal">
+        <%= render "shared/error_messages", :target => @user %>
+        <div class="tabbable tabs-left">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab1" data-toggle="tab">Profile</a></li>
+            <li><a href="#tab2" data-toggle="tab">Account Settings</a></li>
+            <li><a href="#tab3" data-toggle="tab">Notifications</a></li>
+            <li><a href="#tab4" data-toggle="tab">Subscriptions</a></li>
+          </ul>
+          <div class="tab-content">
+            <%= render :partial => 'user_settings_tab1', :locals => { :user => user }%>
+            <%= render :partial => 'user_settings_tab2', :locals => { :user => user } %>
+            <%= render :partial => 'user_settings_tab3', :locals => { :user => user } %>
+            <%= render :partial => 'user_settings_tab4', :locals => { :user => user } %>
+          </div>
+        </div>
+        <div class="user-button-actions">
+          <%= user.submit "Update", :class=>"controls btn btn-success btn-large" %>
+        </div>
+      </div>
+  <% end %>
+</div>

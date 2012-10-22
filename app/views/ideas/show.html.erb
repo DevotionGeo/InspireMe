@@ -1,0 +1,19 @@
+<!--TODO Improve the ideas/show form-->
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @idea.title %>
+</p>
+
+<p>
+  <b>Content:</b>
+  <%= @idea.content %>
+</p>
+
+<div class="control-group">
+ <% @Passets.each do |asset|  %>
+    <%= link_to image_tag(asset.asset.url(:thumb), :class=> 'img-polaroid'),asset.asset.url(:original) %>
+ <% end %>
+</div>

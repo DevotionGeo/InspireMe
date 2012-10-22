@@ -1,0 +1,22 @@
+<div class="tab-pane" id="tab2">
+  <h2>Account Settings</h2>
+  <div class="control-group">
+    <%= user.label :firstname, :class=>"control-label"  %>
+    <%= user.text_field :first_name, :class=>"controls" %>
+  </div>
+  <div class="control-group">
+    <%= user.label :surname, :class=>"control-label" %>
+    <%= user.text_field :surname, :class=>"controls" %>
+  </div>
+  <div class="control-group">
+    <%= user.label :email, "Primary email", :class=>"control-label" %>
+    <%= user.text_field :email, :readonly => true, :class=>"controls" %>
+  </div>
+
+  <div class="control-group">
+    <%= link_to "Reset Password", new_passwordreset_path, :class=> "btn btn-warning btn-medium"%>
+  </div>
+  <div class="control-group">
+    <%= link_to "Delete Account", root_url, :class=> "btn btn-danger btn-medium" %>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<h1 class="page-header">My Lists</h1>
+<p>sort by:<%= link_to "A-Z",lists_path(:so=>"a") %> / <%= link_to "Z-A",lists_path(:so=>"z") %> / <%= link_to "newest",lists_path(:so=>"0") %> / <%= link_to "oldest",lists_path(:so=>"9") %></p>
+<ul class="thumbnails">
+    <% @lists.each do |list| %>
+      <% @Logo = Asset.gather_logo_for_list(list.id)  %>
+        <li class ="span3">
+            <div class="thumbnail">
+              <h3>
+                <% @Logo.each do |asset|  %>
+                    <%= link_to image_tag(asset.asset.url(:thumb), :class=> 'img-polaroid'), list_path(:id => list.name) %>
+                <% end %>
+                <%= link_to list.name.titlecase, list_path(:id => list.name) %>
+                <% if list.private %>
+                    <span class="pull-right"><i class="icon-lock"></i></span>
+                <% end %>
+              </h3>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
+               </p>
+              <% if list.user_id !=current_user.id %>
+                <%= link_to "Follow", root_url, :class=>"btn pull-right btn-link btn-small" %>
+              <% end %>
+              <p>
+                <% if list.user_id == current_user.id %>
+                    <%=  link_to '<i class="icon-pencil"></i>'.html_safe,edit_list_path(:id => list.name), :title=>"Edit list" %>
+                <% end %>
+              <%=  link_to '<i class="icon-zoom-in"></i>'.html_safe, list_path(:id => list.name), :title=>"view list" %>
+                <% if list.user_id !=current_user.id %>
+                    <%=  link_to '<i class="icon-flag"></i>'.html_safe,root_url, :title=>"Report list" %>
+                <% end %>
+                <% if list.user_id == current_user.id %>
+                    <%=  link_to '<i class="icon-trash"></i>'.html_safe,list_path(:id => list.name), :method => :delete, :title=>"Delete list" %>
+                <% end %>
+              </p>
+            </div>
+        </li>
+    <% end %>
+</ul>

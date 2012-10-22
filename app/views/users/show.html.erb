@@ -1,0 +1,45 @@
+<div class="hero-unit">
+    <h1>
+      <% @assets = Asset.gather_current_user_profile(@user.id) %>
+      <% if @assets.count > 0  %>
+        <%= image_tag(@assets.first.asset.url, :size=> "200x200", :class=> "img-polaroid") %>
+          <% else %>
+          <%= image_tag "missing.jpg", :size=> "200x200", :class=> "img-polaroid"  %>
+      <% end %>
+      <%= @user.displayname.capitalize %>
+    </h1>
+      <i><h4 class="muted"><%= @user.description %></h4></i>
+    <div class="row">
+          <div class="span12">
+            <%= link_to "Facebook", @user.facebook_id, :class=>"btn btn-primary" %> <%= link_to "Twitter", @user.twitter_id, :class=>"btn btn-primary" %> <%=link_to "WWW", @user.website, :class=>"btn btn-primary" %>
+          </div>
+    </div>
+</div>
+
+
+<div class="row">
+  <div class="span8 pull-left">
+    <p>Joined <%= @user.created_at.strftime("%B %Y") %></p>
+  </div>
+</div>
+<div class="row">
+  <div class="span12">
+  <p>Has 15 followers Following over 3,000 </p>
+  </div>
+</div>
+<div class="row">
+  <div class="span8 pull-left">
+    <p>Recent list/idea/friendship activity</p>
+  </div>
+  <div class="span4">
+      <p>15 lists added Top 5 lists with most ideas</p>
+    <ul>
+        <% @listings.each do |mylists| %>
+            <li>
+              <%= mylists.list.name %>
+            </li>
+        <% end %>
+    </ul>
+  </div>
+</div>
+

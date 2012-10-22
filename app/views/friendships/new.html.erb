@@ -1,0 +1,26 @@
+
+<h4>People you may already know...</h4>
+<ul class="thumbnails">
+  <% for friendship in current_user.friendships %>
+      <% @friends_friends = Friendship.gather_friends(friendship) %>
+      <% for frd in @friends_friends %>
+          <% @e = frd.friend_id %>
+          <% @friends_friend = User.gather_friends_friend_details(@e) %>
+          <li class ="span3">
+            <div class="thumbnail">
+                <%= render 'possible_friends',  :ff => @friends_friend, :friendship => friendship %>
+            </div>
+          </li>
+      <% end %>
+  <% end %>
+</ul>
+<h4>Possible new friends...</h4>
+<ul class="thumbnails">
+  <% @allusers.each do |list| %>
+      <li class ="span3">
+        <div class="thumbnail">
+            <%= render  'maybe_friends', :mf => list %>
+        </div>
+      </li>
+  <% end %>
+</ul>

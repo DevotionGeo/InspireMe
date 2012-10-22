@@ -1,0 +1,10 @@
+<div class="tab-pane" id="tab4">
+  <h2>Lists I'm following</h2>
+  <ul>
+    <% @listings.each do |mylists| %>
+        <li>
+          <%= mylists.list.name %>
+        </li>
+    <% end %>
+  </ul>
+</div>

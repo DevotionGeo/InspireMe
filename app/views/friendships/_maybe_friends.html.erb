@@ -1,0 +1,2 @@
+<%= link_to mf.displayname.titlecase, user_path(:id => mf.displayname) %>
+<%= link_to "+", friendships_path(:friend_id => mf.id), :method => :post, :class =>"btn btn-small pull-right" %>

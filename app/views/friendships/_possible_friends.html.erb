@@ -1,0 +1,4 @@
+<%= link_to ff.displayname.titlecase, user_path(:id => ff.displayname) %>
+(mutual friend of <%= link_to friendship.friend.displayname, user_path(:id => friendship.friend.displayname) %>)
+<%= link_to "+",  friendships_path(:friend_id => ff.id), :method => :post, :class =>"btn btn-small pull-right" %>
+<%= ff.description %>

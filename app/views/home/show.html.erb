@@ -1,0 +1,14 @@
+
+<h1 class="page-header">My Home Page</h1>
+<p>Lists updated since I last logged on</p>
+ <% @newlists.each do |nc| %>
+     <%=  nc.name %>
+ <% end %>
+ <hr />
+
+ <p>New ideas updated since I logged on</p>
+
+ <% @newideas.each do |nc| %>
+     <%=  nc.title %>
+ <% end %>
+ <hr />

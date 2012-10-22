@@ -1,0 +1,61 @@
+
+<h1 class="page-header">
+    <% @Lassets.each do |asset|  %>
+      <%= link_to image_tag(asset.asset.url(:thumb), :class=> 'img-polaroid'),asset.asset.url(:original) %>
+    <% end %>
+  <%= @list.name.titlecase %> list
+  <% if @list.private %>
+      <span class="pull-right"><i class="icon-lock"></i></span>
+  <% end %>
+  <div class="btn-group">
+    <p class="pull-right">
+      <%= link_to "Follow", listings_path(:id=>@list.id), :method => "post", :class=>"btn btn-mini" %> <%= link_to "Edit",edit_list_path(:id => @list.name), :class=>"btn btn-mini" %> <%= link_to "Delete",root_url, :class=>"btn btn-mini" %>
+      </p>
+  </div>
+    <p><small><%= @list.description %></small></p>
+</h1>
+
+<div>
+    <h5>
+      This list was created
+      <%= distance_of_time_in_words_to_now(@list.created_at) %> ago
+    </h5>
+    <h5>
+      And was last modified
+      <%= distance_of_time_in_words_to_now(@list.updated_at) %> ago
+    </h5>
+
+  <h5>Number of followers:<%= @followers.count %></h5>
+  <% @followers.each do |fl| %>
+    <%= fl.user.displayname %>
+  <% end %>
+  <hr />
+
+
+</div>
+<span class ="clearfix"></span>
+<p><%=  link_to "Create New Content", new_idea_path(:listid=> @list.id) %></p>
+<p>Existing Content</p>
+<ul class="thumbnails">
+    <% @ideas.each do |idea| %>
+      <% @Passets = Asset.gather_images_for_idea(idea.id)  %>
+          <li class ="span3">
+            <div class="thumbnail">
+
+              <% @Passets.each do |asset|  %>
+                  <%=image_tag(asset.asset.url(:thumb), :class=> 'pull-left img-polaroid') %>
+              <% end %>
+
+              <%= link_to idea.title, idea_path(:id => idea.title) %>
+              <p><%= idea.content %></p>
+              <p>
+                <%=  link_to '<i class="icon-pencil"></i>'.html_safe,edit_idea_path(:id => idea.title), :title=>"Edit idea" %>
+                <%=  link_to '<i class="icon-zoom-in"></i>'.html_safe, idea_path(:id => idea.title), :title=>"view idea" %>
+                <%=  link_to '<i class="icon-flag"></i>'.html_safe,root_url, :title=>"Report idea" %>
+                <%=  link_to '<i class="icon-trash"></i>'.html_safe,root_url, :title=>"Delete idea" %>
+              </p>
+            </div>
+
+          </li>
+    <% end %>
+</ul>

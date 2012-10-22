@@ -1,0 +1,43 @@
+
+<% content_for :homepage do %>
+    <div class="span3">
+        <h4 class="muted">Inspiration</h4>
+        <ul class="nav nav-tabs nav-stacked">
+          <li><%= link_to "Discover" %></li>
+        </ul>
+        <h4 class="muted">Groups</h4>
+        <ul class="nav nav-tabs nav-stacked">
+          <li><%= link_to "Special group" %></li>
+          <li><%= link_to "Writing" %></li>
+          <li><%= link_to "Blogging" %></li>
+          <li><%= link_to "Create Group" %></li>
+        </ul>
+        <h4 class="muted">Lists
+          <% if current_user %>
+            (<%= @mylists.count %>)
+          <% end %>
+        </h4>
+          <ul class="nav nav-tabs nav-stacked">
+            <li><%= link_to 'Create New List', new_list_path %></li>
+            <li><%= link_to 'My Lists', lists_path %></li>
+            <% if current_user %>
+                <% @mylists.each do |l| %>
+                    <li><%= link_to l.name, list_path(:id => l.name) %></li>
+                <% end %>
+            <% end %>
+          </ul>
+      <h4 class="muted">Friends</h4>
+        <ul class="nav nav-tabs nav-stacked">
+          <li><%= link_to "My Friends",friendships_path %></li>
+          <li><%= link_to "Find Friends", new_friendship_path %></li>
+        </ul>
+        <h4 class="muted">Notifications</h4>
+        <ul class="nav nav-tabs nav-stacked">
+          <li><%= link_to "Close Friends (5)" %></li>
+          <li><%= link_to "Colleagues(22)" %></li>
+          <li><%= link_to "Acquaintances(123)" %></li>
+        </ul>
+    </div>
+<% end %>
+
+<%= content_for :homepage if current_user %>

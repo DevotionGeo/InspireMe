@@ -1,0 +1,47 @@
+<div class="tab-pane active" id="tab1">
+  <h2>Profile Settings </h2>
+  <div class="control-group">
+    <%= user.label :displayname, "Displayed Name", :class=>"control-label" %>
+    <%= user.text_field :displayname, :class=>"controls" %>
+  </div>
+  <div class="control-group">
+    <%= user.label :avatar_url, "Avatar", :class=>"control-label" %>
+    <div class="control-group">
+      <%= user.fields_for :assets do |asset_fields| %>
+          <% if  asset_fields.object.new_record? %>
+              <p><%= asset_fields.file_field :asset %></p>
+          <% end %>
+      <% end %>
+    </div>
+    <div class="control-group">
+      <%= user.fields_for :assets do |asset_fields| %>
+          <% unless asset_fields.object.new_record? %>
+              <p>
+                <%= image_tag(asset_fields.object.asset.url(:thumb), :class=> 'img-polaroid') %>
+                <span>Remove </span><%= asset_fields.check_box :_destroy %>
+                File name:<%= asset_fields.object.asset_file_name  %>
+              </p>
+          <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= user.label :description, :class=>"control-label" %>
+    <%= user.text_area :description, :rows => 5, :cols => 25, :class=>"controls" %>
+  </div>
+  <div class="control-group">
+    <%= user.label :facebook, :class=>"control-label" %>
+    <%= user.text_field :facebook_id, :class=>"controls" %>
+  </div>
+  <div class="control-group ">
+    <%= user.label :twitter, :class=>"control-label" %>
+    <div class="input-prepend">
+      <span class="add-on controls">@</span>
+      <%= user.text_field :twitter_id, :class=>"span2", :id=>"prependedInput"%>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= user.label :website, :class=>"control-label" %>
+    <%= user.text_field :website, :class=>"controls", :placeholder => "http://" %>
+  </div>
+</div>
