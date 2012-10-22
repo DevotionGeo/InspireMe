@@ -4,36 +4,20 @@ Friends and their recent activity....
   <% for friendship in current_user.friendships %>
       <li class ="span3">
         <div class="thumbnail">
-
-          <h1><%=h friendship.friend.displayname.titlecase %></h1>
-            (<%= link_to "remove", friendship, :method => :delete %>)
-          <%= friendship.friend.id %>
-          <% @Passt = Asset.find_by_user_id(friendship.friend.id) %>
-          <% if @Passt.present? %>
-
-                  <%=image_tag(@Passt.asset_file_name, :class=> 'pull-left img-polaroid') %>
-
-              <%= @Passt.asset_file_name %>
+          <h1>
+          <% @assets = Asset.gather_current_user_profile(friendship.friend.id) %>
+          <% if @assets.present? %>
+              <%= image_tag(@assets.first.asset.url, :size=> "36x36", :class=> 'pull-left img-polaroid') %>
+          <% else %>
+              <%= image_tag("missing.jpg", :size=> "36x36", :class=> 'pull-left img-polaroid') %>
           <% end %>
+          <%=link_to friendship.friend.displayname.titlecase , user_path(:id => friendship.friend.displayname) %></h1>
+          (<%= link_to "remove friendship", friendship, :method => :delete %>)
           <ul>
-          <li>
-            Activity x
-          </li>
-          <li>
-            Activity x
-          </li>
-          <li>
-            Activity x
-          </li>
-          <li>
-            Activity x
-          </li>
-          <li>
-            Activity x
-          </li>
-          <li>
-            Activity x
-          </li>
+            <li>New Activity</li>
+            <li>New Activity</li>
+            <li>New Activity</li>
+            <li>New Activity</li>
           </ul>
         </div>
       </li>
